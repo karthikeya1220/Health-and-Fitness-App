@@ -108,6 +108,27 @@ const activities = [
   },
 ];
 
+const genderOptions = [
+  {
+    id: 'male',
+    title: 'Male',
+    description: 'Identify as male',
+    icon: 'man',
+  },
+  {
+    id: 'female',
+    title: 'Female',
+    description: 'Identify as female',
+    icon: 'woman',
+  },
+  {
+    id: 'other',
+    title: 'Other',
+    description: 'Prefer not to specify',
+    icon: 'person',
+  },
+];
+
 type Step = 'info' | 'goals' | 'activities';
 
 export default function ProfileSetup() {
@@ -216,15 +237,41 @@ export default function ProfileSetup() {
               />
             </View>
 
-            <View style={styles.inputContainer}>
-              <TextInput
-                style={styles.input}
-                placeholder="Gender"
-                placeholderTextColor="rgba(255,255,255,0.6)"
-                value={gender}
-                onChangeText={setGender}
-              />
-            </View>
+            <Text style={styles.sectionTitle}>Gender</Text>
+            {genderOptions.map((option, index) => (
+              <Animated.View
+                key={option.id}
+                entering={FadeInDown.delay(index * 100)}
+              >
+                <TouchableOpacity
+                  style={[
+                    styles.levelCard,
+                    gender === option.id && styles.selectedCard,
+                  ]}
+                  onPress={() => setGender(option.id)}
+                >
+                  <View style={styles.levelIcon}>
+                    <Ionicons name={option.icon} size={24} color="#4ADE80" />
+                  </View>
+                  <View style={styles.levelInfo}>
+                    <Text style={styles.levelTitle}>{option.title}</Text>
+                    <Text style={styles.levelDescription}>
+                      {option.description}
+                    </Text>
+                  </View>
+                  <View
+                    style={[
+                      styles.checkbox,
+                      gender === option.id && styles.checkedBox,
+                    ]}
+                  >
+                    {gender === option.id && (
+                      <Ionicons name="checkmark" size={16} color="#121212" />
+                    )}
+                  </View>
+                </TouchableOpacity>
+              </Animated.View>
+            ))}
 
             <Text style={styles.sectionTitle}>Fitness Level</Text>
             {fitnessLevels.map((level, index) => (

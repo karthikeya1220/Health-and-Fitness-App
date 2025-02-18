@@ -478,7 +478,7 @@ const styles = StyleSheet.create({
   },
   mindfulnessBadge: {
     alignSelf: 'flex-start',
-    backgroundColor: 'rgba(255,255,255,0.9)',
+    backgroundColor: 'rgba(74,222,128,0.9)',
     paddingHorizontal: 12,
     paddingVertical: 6,
     borderRadius: 12,
